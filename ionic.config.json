@@ -1,0 +1,7 @@
+{
+  "name": "curious-facts",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

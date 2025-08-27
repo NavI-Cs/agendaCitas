@@ -22,7 +22,7 @@
       <ion-spinner v-if="isLoading" name="crescent" class="ion-text-center"></ion-spinner>
 
       <ion-list v-if="books.length > 0">
-        <ion-item button v-for="book in books" :key="book.id" @click="goToDetails(book)">
+        <ion-item button v-for="book in books" :key="book.id" @click="goToDetails(book.id)">
           <ion-thumbnail slot="start">
             <img :src="book.thumbnail || 'https://via.placeholder.com/64'" />
           </ion-thumbnail>
@@ -56,7 +56,7 @@ import {
   useIonRouter,
 } from '@ionic/vue';
 import { logOutOutline, heart } from 'ionicons/icons';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/services/firebase';
 import { searchBooks as apiSearchBooks } from '@/services/books.service';
@@ -78,11 +78,11 @@ const searchBooks = async () => {
   }
 };
 
-const goToDetails = (book: any) => {
-  // Navega a la página de detalles con el libro seleccionado
+const goToDetails = (bookId: string) => {
+  // Navega a la página de detalles con el ID del libro en la URL
   router.push({
     name: 'book-details',
-    state: { bookData: book },
+    params: { id: bookId },
   });
 };
 
@@ -122,4 +122,3 @@ ion-thumbnail {
   --border-radius: 5px;
 }
 </style>
-
